@@ -7,6 +7,7 @@ require('colors')
 const database_name = "ujcica"
 const collection_name = "mammals"
 const static_folder = "root"
+const vue_folder = "front-end/dist"
 mdb.connect( 'mongodb://localhost:27017',
               { useNewUrlParser: true },
               ( err, client ) => err
@@ -53,4 +54,5 @@ app.post( /del/, ( req, res ) => {
                   : res.send( { error: -1 } )
 } )
 app.use( '/', express.static( static_folder ) )
+app.use( '/vue', express.static( vue_folder ) )
 app.listen( 3000 )
