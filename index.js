@@ -1,28 +1,19 @@
-var app = ( express = require( 'express' ) )( )
-    app . use( require( 'body-parser' ).json( ) )
-var mdb = require( 'mongodb' ).MongoClient
-var ObjectId = require('mongodb').ObjectID
+const app = ( express = require( 'express' ) )( )
+      app . use( require( 'body-parser' ).json( ) )
+const mdb = require( 'mongodb' ).MongoClient
+const ObjectId = require('mongodb').ObjectID
+app.use(require('cors')())
+require('colors')
 const database_name = "ujcica"
 const collection_name = "mammals"
-const static_folder = "dist"
+const static_folder = "root"
 mdb.connect( 'mongodb://localhost:27017',
               { useNewUrlParser: true },
               ( err, client ) => err
-                  ? ( console.log('MongoDB hiba!') )
+                  ? ( console.log('[index.js] MongoDB hiba!'.red) )
                   : ( db = client.db(database_name),
-                      console.log('MongoDB OKÉ') )
+                      console.log('[index.js] MongoDB OK'.green) )
 )
-app.use( (req, res, next) => {
-    res.header(
-        'Access-Control-Allow-Origin',
-        '*'
-    )
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept'
-    )
-    next()
-} )
 app.get( /get/, ( req, res ) =>
               db  ? db.collection( collection_name )
                       .find()
