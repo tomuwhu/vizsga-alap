@@ -3,19 +3,10 @@
     <v-container>
       <v-spacer/>
       <v-layout row>
-        <v-flex xs3
-          v-for="(elem,key) in t[0]"
-          class="cell b">{{key}}</v-flex>
+        <v-flex xs2 class="cell">Adatok:</v-flex>
+        <v-flex xs10 class="cell">
+          {{t}}</v-flex>
       </v-layout>
-      <v-layout
-          row
-          v-for="row in t" >
-        <v-flex xs3
-          v-for="(elem,key) in row"
-          class="cell">{{elem}}
-        </v-flex>
-      </v-layout>
-      <v-spacer/>
     </v-container>
   </v-app>
 </template>
@@ -26,6 +17,12 @@ export default {
   data: () => ({
     t: []
   }),
+  methods: {
+
+  },
+  computed: {
+
+  },
   mounted() {
     this
       .axios
@@ -38,9 +35,6 @@ export default {
 </script>
 
 <style>
-.b {
-  font-weight: bold;
-}
 .cell {
   text-align: center;
   margin:3px;
