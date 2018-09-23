@@ -61,6 +61,7 @@ app   .post( /del/, ( req, res ) => {
                        )
                   : res.send( { error: -1 } )
 } )
+
 app   .use( '/', express.static( static_folder ) )
 app   .use( '/vue', express.static( vue_folder ) )
 app   .listen( 3000 )
