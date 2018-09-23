@@ -2,10 +2,12 @@
   <v-app>
     <v-container>
       <v-spacer/>
-      <v-layout row>
-        <v-flex xs2 class="cell">Adatok:</v-flex>
-        <v-flex xs10 class="cell">
-          {{t}}</v-flex>
+      <v-layout row
+                v-for="row in t">
+        <v-flex class="cell"
+                v-for="cell in row">
+          {{ cell }}
+        </v-flex>
       </v-layout>
     </v-container>
   </v-app>
@@ -38,7 +40,7 @@ export default {
 .cell {
   text-align: center;
   margin:3px;
-  padding:3px;
+  padding:8px;
   box-shadow: 1px 1px 4px;
 }
 </style>
