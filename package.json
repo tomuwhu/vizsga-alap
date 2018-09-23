@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/tomuwhu/vizsga-alap/issues"
   },
-  "homepage": "https://github.com/tomuwhu/vizsga-alap#readme"
+  "homepage": "https://github.com/tomuwhu/vizsga-alap#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongodb": "^3.1.6",
+    "nodemon": "^1.18.4"
+  }
 }
