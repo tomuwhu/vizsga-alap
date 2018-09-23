@@ -1,0 +1,24 @@
+{
+  "name": "vizsga-alap",
+  "version": "1.0.0",
+  "description": "Vizsga alap",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomuwhu/vizsga-alap.git"
+  },
+  "keywords": [
+    "vizsga",
+    "okj",
+    "webfejlesztés"
+  ],
+  "author": "Dr. Németh Tamás",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomuwhu/vizsga-alap/issues"
+  },
+  "homepage": "https://github.com/tomuwhu/vizsga-alap#readme"
+}
