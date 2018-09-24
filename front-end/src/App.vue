@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      Front-end
+      <h1>Front-end</h1>
   </v-app>
 </template>
 
