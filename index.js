@@ -12,27 +12,33 @@ const database_name   =  'ujcica'
 const collection_name =  'mammals'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
+const logger          =  false
 
 mdb   .connect( 'mongodb://localhost:27017',
                  { useNewUrlParser: true },
                  ( err, client ) => err
-                    ? ( console.log('[index.js] MongoDB hiba!'.red) )
+                    ? ( console.log('[indexjs] mongodb connection failled!'.red) )
                     : ( db = client.db(database_name),
-                        console.log('[index.js] MongoDB OK'.green) )
+                        console.log('[indexjs] mongodb connected'.green) )
 )
 
 app   .get( /get/, ( req, res ) =>
               db  ? db.collection( collection_name )
                       .find()
-                      .toArray( ( err, result ) => err
+                      .toArray( ( err, result ) => {
+                        logger ? (
+                          err ? console.log(err) : 1,
+                          result ? console.log(result) : 1
+                        ) : 1
+                        err
                           ? res.send(err)
                           : res.send(result)
-                      )
+                      } )
                   : res.send( { error: -1 } )
 )
 
 app   .post( /post/, ( req, res ) => {
-              console.log(req.body._id)
+              logger ? console.log(req.body) : 1
               if (req.body._id) {
                 let ezt = req.body._id
                 delete req.body._id
@@ -54,6 +60,7 @@ app   .post( /post/, ( req, res ) => {
 } )
 
 app   .post( /del/, ( req, res ) => {
+              logger ? console.log(req.body) : 1
               db  ? db .collection( collection_name  )
                        .deleteOne( { "_id" : ObjectId(req.body.ezt) } )
                        .then( v=>
