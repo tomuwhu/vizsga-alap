@@ -18,23 +18,38 @@
 - .../vizsga-alap/front-end> ```npm run build```
 
 <hr>
+
+### Példák a használathoz
+###### .../vizsga-alap/front-end/src/App.vue
+
 #### Axios - Adatok lekérése:
 ```javascript
-this
-  .axios
-  .get('http://localhost:3000/get')
-  .then( v => {
-    this.t = v.data
-  })
+mounted() {
+  ...
+  this
+    .axios
+    .get('http://localhost:3000/get')
+    .then( v => {
+      this.t = v.data
+    })
+  ...  
+}  
 ```
 
 #### Adatok megjelenítése:
 ```HTML
-<v-layout row
-          v-for="row in t">
-  <v-flex :class="'xs'+Math.round(12/Object.keys(row).length)"
-          v-for="cell in row">
-    {{ cell }}
-  </v-flex>
-</v-layout>
-```
+<template>
+  <v-app>
+    <v-container>
+    ...
+      <v-layout row
+                v-for="row in t">
+        <v-flex :class="'xs'+Math.round(12/Object.keys(row).length)"
+                v-for="cell in row">
+          {{ cell }}
+        </v-flex>
+      </v-layout>
+    ...
+    </v-container>
+  </v-app>
+</template>```
