@@ -1,12 +1,11 @@
 <template>
-  <v-app>
+  <v-app id="app">
       Front-end
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'App',
   data: () => ({
 
   }),
@@ -23,5 +22,8 @@ export default {
 </script>
 
 <style>
-
+#app {
+  margin: 20px;
+  text-align: center;
+}
 </style>
