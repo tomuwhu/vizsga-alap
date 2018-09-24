@@ -1,18 +1,16 @@
 const app = ( express =
-                 require('express' ) )( )
-      app . use( require('body-parser' ).json( ) )
-      app . use( require('cors' )( ) )
+                 require('express') )()
+      app . use( require('body-parser').json() )
+      app . use( require('cors')() )
                  require('colors')
 const mdb = ( mongo =
-                 require('mongodb') )
-                  .MongoClient
-const ObjectId = mongo
-                  .ObjectID
+                 require('mongodb') )   .MongoClient
+const ObjectId        =   mongo         .ObjectID
 const database_name   =  'ujcica'
 const collection_name =  'mammals'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
-const logger          =  false
+const logger          =   false
 
 mdb   .connect( 'mongodb://localhost:27017',
                  { useNewUrlParser: true },
