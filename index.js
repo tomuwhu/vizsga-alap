@@ -6,8 +6,8 @@ const app = ( express =
 const mdb = ( mongo =
                  require('mongodb') )   .MongoClient
 const ObjectId        =   mongo         .ObjectID
-const database_name   =  'ujcica'
-const collection_name =  'mammals'
+const database_name   =  'vizsga'
+const collection_name =  'alap'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
 const logger          =   false
@@ -20,7 +20,7 @@ mdb   .connect( 'mongodb://localhost:27017',
                         console.log('[indexjs] mongodb connected'.green) )
 )
 
-app   .get( /get/, ( req, res ) =>
+app   .get( /list/, ( req, res ) =>
               db  ? db.collection( collection_name )
                       .find()
                       .toArray( ( err, result ) => {
@@ -35,7 +35,7 @@ app   .get( /get/, ( req, res ) =>
                   : res.send( { error: -1 } )
 )
 
-app   .post( /post/, ( req, res ) => {
+app   .post( /save/, ( req, res ) => {
               logger ? console.log(req.body) : 1
               if (req.body._id) {
                 let ezt = req.body._id
