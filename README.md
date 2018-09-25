@@ -9,14 +9,20 @@
 .../vizsga-alap> ```npm i```
 .../vizsga-alap/front-end> ```npm i```
 
+### MongoDB futtatása
+- ```mongod```
+
 ### Back-end futtatása
 - .../vizsga-alap> ```npm test```
+- Böngészőben: http://localhost:3000
 
 ### Front-end futtatása
 - .../vizsga-alap/front-end> ```npm run serve```
+- Böngészőben: http://localhost:8080
 
 ### Front-end fordítása
 - .../vizsga-alap/front-end> ```npm run build```
+- Böngészőben: http://localhost:3000/vue
 
 <hr>
 
@@ -53,4 +59,48 @@ mounted() {
     ...
     </v-container>
   </v-app>
-</template>```
+</template>
+```
+#### Axios - Adatok mentése:
+```javascript
+ment() {
+  this
+    .axios
+    .post(
+      'http://localhost:3000/save',
+       this.o
+    )
+    .then( v => {
+      if (logger) console.log(v.data)
+      if (v.data._id) {
+        this.t.push(v.data)
+        this.view = 'list'
+        this.o = {}
+      }
+      if (v.data.nModified) {
+        this.view = 'list'
+        this.o = {}
+      }
+    } )
+}
+```
+
+#### Adatok törlése:
+```javascript
+töröl(ezt) {
+  this
+    .axios
+    .post(
+      'http://localhost:3000/del',
+       ezt
+    )
+    .then( v => {
+      if (logger) console.log(v.data)
+      if (v.data.n) {
+        this.t = this.t.filter( v =>
+          v._id != ezt._id
+        )
+      }
+    } )
+}
+```
