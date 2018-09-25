@@ -17,6 +17,16 @@
               <span v-else-if="elem[0]==='irsz'">
                 {{elem[1] + ' - ' + idx(elem[1])}}
               </span>
+              <span v-else-if="elem[0]==='tel'">
+                {{
+                    '+36 (' +
+                    elem[1].slice(0,2) +
+                    ') ' +
+                    elem[1].slice(2,5) + '-' +
+                    elem[1].slice(5,7) + '-' +
+                    elem[1].slice(7,9)
+                }}
+              </span>
               <span v-else>
                 {{elem[1]}}
               </span>
