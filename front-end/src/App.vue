@@ -1,16 +1,33 @@
 <template>
   <v-app id="app">
-      <h1>Front-end</h1>
+      <h1>Személyi nyilvántartás</h1>
+      <div class="c1">
+        <v-text-field
+          label="Irányítószám"
+          v-model="o.irsz"
+          @keyup="f()"
+        />
+        <h2>{{varos}}</h2>
+      </div>
   </v-app>
 </template>
 
 <script>
 export default {
+  props: ['idb'],
   data: () => ({
-
+    o: {},
+    varos:''
   }),
   methods: {
-
+    f() {
+      let x = this.idb
+                  .find( v =>
+                         v.irsz === this.o.irsz
+                  )
+      if (x) this.varos = x.helyseg
+      else this.varos = '???'
+    }
   },
   computed: {
 
@@ -22,8 +39,24 @@ export default {
 </script>
 
 <style>
+.c1 {
+  box-shadow: 1px 1px 4px;
+  border-radius: 12px;
+  padding:20px;
+  height:80%;
+  background-color: #efedde;
+}
+h1 {
+  box-shadow: 1px 1px 4px;
+  border-radius: 12px;
+  padding:20px;
+  margin-bottom:23px;
+  background-color: #dfedde;
+}
 #app {
   margin: 20px;
   text-align: center;
+  height:90%;
+  background-color: white;
 }
 </style>

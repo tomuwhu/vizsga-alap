@@ -7,6 +7,7 @@
 - repository klónozása
 - .../> ```cd vizsga-alap```
 .../vizsga-alap> ```npm i```
+.../vizsga-alap/front-end> ```npm i```
 
 ### Back-end futtatása
 - .../vizsga-alap> ```npm test```
