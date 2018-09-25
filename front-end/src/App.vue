@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>.... nyilvántartás</h1>
+      <h1>Példa nyilvántartás</h1>
       <div class="c1" v-if="view=='list'">
         <table class="table" v-if="t.length">
           <tr>
@@ -9,8 +9,8 @@
               <span v-else>#</span>
             </th>
           </tr>
-          <tr v-for="sor in t">
-            <td v-for="(elem,key) in Object.entries(sor)">
+          <tr v-for="(sor, key) in t">
+            <td v-for="elem in Object.entries(sor)">
               <span v-if="elem[0]==='_id'">
                 {{key+1}}
               </span>
@@ -32,13 +32,19 @@
               </span>
             </td>
             <td>
-              <v-btn small class="green--text">
+              <v-btn
+                 small
+                @click="o = sor, view='form'"
+                 class="green--text">
               <i class="material-icons">
               edit
               </i>
               </v-btn>
-              <v-btn small class="red--text">
-              <i class="material-icons">
+              <v-btn
+                 small
+                 class = "red--text"
+                @click = "töröl(sor)">
+              <i class = "material-icons">
               delete
               </i>
               </v-btn>
@@ -76,7 +82,7 @@
 </template>
 
 <script>
-const logger = false
+const logger = true
 export default {
   props: ['idx'],
   data: () => ({
@@ -94,7 +100,31 @@ export default {
         )
         .then( v => {
           if (logger) console.log(v.data)
-          if (v.data._id) this.t.push(v.data)
+          if (v.data._id) {
+            this.t.push(v.data)
+            this.view = 'list'
+            this.o = {}
+          }
+          if (v.data.nModified) {
+            this.view = 'list'
+            this.o = {}
+          }
+        } )
+    },
+    töröl(ezt) {
+      this
+        .axios
+        .post(
+          'http://localhost:3000/del',
+           ezt
+        )
+        .then( v => {
+          if (logger) console.log(v.data)
+          if (v.data.n) {
+            this.t = this.t.filter( v =>
+              v._id != ezt._id
+            )
+          }
         } )
     }
   },
