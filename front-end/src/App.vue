@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>Személyi nyilvántartás</h1>
+      <h1>.... nyilvántartás</h1>
       <div class="c1">
         <v-text-field
           label="Irányítószám"
