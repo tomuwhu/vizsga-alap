@@ -2,6 +2,9 @@
   <v-app id="app">
       <h1>Példa nyilvántartás</h1>
       <div class="c1" v-if="view=='list'">
+        <v-text-field
+            label="Keresés / Szűrés"
+            v-model="szuro"/>
         <table class="table" v-if="t.length">
           <tr>
             <th v-for="elem in Object.keys(t[0])">
@@ -9,7 +12,7 @@
               <span v-else>#</span>
             </th>
           </tr>
-          <tr v-for="(sor, key) in t">
+          <tr v-for="(sor, key) in lista">
             <td v-for="elem in Object.entries(sor)">
               <span v-if="elem[0]==='_id'">
                 {{key+1}}
@@ -86,6 +89,7 @@ const logger = true
 export default {
   props: ['idx'],
   data: () => ({
+    szuro: '',
     o: {},
     t: [],
     view: 'list'
@@ -131,6 +135,15 @@ export default {
   computed: {
     varos() {
       return this.idx(this.o.irsz)
+    },
+    lista() {
+      return this
+              .t
+              .filter( v =>
+                new RegExp(this.szuro,'i').test( this.idx(v.irsz) )
+              )
+              .sort( (a,b) => this.idx(a.irsz).localeCompare(this.idx(b.irsz)) )
+              .slice(0,10)
     }
   },
   mounted() {
