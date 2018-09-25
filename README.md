@@ -104,3 +104,14 @@ töröl(ezt) {
     } )
 }
 ```
+
+#### Ikonos gomb:
+```HTML
+<v-btn
+     small
+     class = "red--text">
+  <i class = "material-icons">
+     clear
+  </i>
+</v-btn>
+```
