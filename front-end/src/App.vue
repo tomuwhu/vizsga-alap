@@ -29,13 +29,11 @@
             </th>
             <td v-for="elem in listview">
               <span v-if="elem.key==='irsz'">
-                {{sor[elem.key] + ' - ' + idx(sor[elem.key])}}
+                {{sor[elem.key] + ', ' + idx(sor[elem.key])}}
               </span>
               <span v-else-if="elem.key==='tel'">
-                {{
-                    '+36 (' +
-                    sor[elem.key].slice(0,2) +
-                    ') ' +
+                {{ '+36 (' +
+                    sor[elem.key].slice(0,2) + ') '+
                     sor[elem.key].slice(2,5) + '-' +
                     sor[elem.key].slice(5,7) + '-' +
                     sor[elem.key].slice(7,9)
@@ -105,7 +103,7 @@ export default {
     t: [],
     view: 'list',
     listview: [
-      { key: 'irsz', mn : 'Irányítószám' },
+      { key: 'irsz', mn : 'Irányítószám, Település' },
       { key: 'tel', mn : 'Telefonszám' }
     ]
   }),
