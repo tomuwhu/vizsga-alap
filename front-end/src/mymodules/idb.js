@@ -2990,4 +2990,7 @@ const idb = [
 { irsz: "9983", helyseg: "Alsószölnök", megye: "Vas" },
 { irsz: "9985", helyseg: "Felsőszölnök", megye: "Vas" }
 ]
-export { idb }
+const idm = new Map()
+idb.forEach( e => idm.set( e.irsz, e.helyseg ) )
+const idx = a => idm.get(a)
+export { idx }

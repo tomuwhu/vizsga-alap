@@ -14,22 +14,20 @@
 
 <script>
 export default {
-  props: ['idb'],
+  props: ['idb','idx'],
   data: () => ({
     o: {},
     varos:''
   }),
   methods: {
     f() {
+
       if ( !Number(this.o.irsz) ||
             Number(this.o.irsz) >  9999
       ) this.o.irsz = this.o.irsz.slice(0,-1)
-      let x = this.idb
-                  .find( v =>
-                         v.irsz === this.o.irsz
-                  )
-      if (x) this.varos = x.helyseg
-      else this.varos = '???'
+
+      this.varos = this.idx(this.o.irsz)
+
     }
   },
   computed: {
