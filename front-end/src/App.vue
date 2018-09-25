@@ -122,7 +122,7 @@ export default {
             this.view = 'list'
             this.o = {}
           }
-          if (v.data.nModified) {
+          if (v.data.n) {
             this.view = 'list'
             this.o = {}
           }

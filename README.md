@@ -38,7 +38,7 @@ mounted() {
 ```
 
 #### Adatok megjelenítése:
-```HTML
+```html
 <template>
   <v-app>
     <v-container>
@@ -53,7 +53,8 @@ mounted() {
     ...
     </v-container>
   </v-app>
-</template>```
+</template>
+```
 
 #### Axios - Adatok mentése:
 ```javascript
@@ -76,7 +77,8 @@ ment() {
         this.o = {}
       }
     } )
-}```
+}
+```
 
 #### Adatok törlése:
 ```javascript
@@ -95,4 +97,5 @@ töröl(ezt) {
         )
       }
     } )
-}```
+}
+```
