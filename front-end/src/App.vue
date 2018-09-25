@@ -95,6 +95,7 @@
 
 <script>
 const logger = false
+const backend = 'http://localhost:3000/'
 export default {
   props: ['idx'],
   data: () => ({
@@ -111,10 +112,7 @@ export default {
     ment() {
       this
         .axios
-        .post(
-          'http://localhost:3000/save',
-           this.o
-        )
+        .post( backend + 'save', this.o )
         .then( v => {
           if (logger) console.log(v.data)
           if (v.data._id) {
@@ -131,10 +129,7 @@ export default {
     töröl(ezt) {
       this
         .axios
-        .post(
-          'http://localhost:3000/del',
-           ezt
-        )
+        .post( backend + 'del', ezt )
         .then( v => {
           if (logger) console.log(v.data)
           if (v.data.n) {
@@ -162,9 +157,7 @@ export default {
   mounted() {
     this
       .axios
-      .get(
-        'http://localhost:3000/list'
-      )
+      .get( backend + 'list' )
       .then( v => {
         if (logger) console.log(v.data)
         if (v.data.length) this.t = v.data
