@@ -10,7 +10,7 @@ const database_name   =  'vizsga'
 const collection_name =  'alap'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
-const logger          =   true
+const logger          =   false
 
 mdb   .connect( 'mongodb://localhost:27017',
                  { useNewUrlParser: true },

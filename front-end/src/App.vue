@@ -2,9 +2,20 @@
   <v-app id="app">
       <h1>Példa nyilvántartás</h1>
       <div class="c1" v-if="view=='list'">
-        <v-text-field
-            label="Keresés / Szűrés"
-            v-model="szuro"/>
+        <v-layout row>
+          <v-text-field
+              label="Keresés / Szűrés"
+              v-model="szuro"/>
+          <v-btn
+             v-if="szuro"
+             small
+            @click="szuro=''"
+             class="red--text">
+          <i class="material-icons">
+          clear
+          </i>
+          </v-btn>
+        </v-layout>
         <table class="table" v-if="t.length">
           <tr>
             <th v-for="elem in Object.keys(t[0])">
@@ -85,7 +96,7 @@
 </template>
 
 <script>
-const logger = true
+const logger = false
 export default {
   props: ['idx'],
   data: () => ({
