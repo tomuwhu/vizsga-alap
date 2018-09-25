@@ -85,7 +85,7 @@ ment() {
 }
 ```
 
-#### Adatok törlése:
+#### Axios - Adatok törlése:
 ```javascript
 töröl(ezt) {
   this
