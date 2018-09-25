@@ -54,3 +54,45 @@ mounted() {
     </v-container>
   </v-app>
 </template>```
+
+#### Axios - Adatok mentése:
+```javascript
+ment() {
+  this
+    .axios
+    .post(
+      'http://localhost:3000/save',
+       this.o
+    )
+    .then( v => {
+      if (logger) console.log(v.data)
+      if (v.data._id) {
+        this.t.push(v.data)
+        this.view = 'list'
+        this.o = {}
+      }
+      if (v.data.nModified) {
+        this.view = 'list'
+        this.o = {}
+      }
+    } )
+}```
+
+#### Adatok törlése:
+```javascript
+töröl(ezt) {
+  this
+    .axios
+    .post(
+      'http://localhost:3000/del',
+       ezt
+    )
+    .then( v => {
+      if (logger) console.log(v.data)
+      if (v.data.n) {
+        this.t = this.t.filter( v =>
+          v._id != ezt._id
+        )
+      }
+    } )
+}```
