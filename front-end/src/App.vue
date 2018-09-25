@@ -18,31 +18,31 @@
         </v-layout>
         <table class="table" v-if="t.length">
           <tr>
-            <th v-for="elem in Object.keys(t[0])">
-              <span v-if="elem!='_id'">{{elem}}</span>
-              <span v-else>#</span>
+            <th>#</th>
+            <th v-for="elem in listview">
+              <span>{{elem.mn}}</span>
             </th>
           </tr>
           <tr v-for="(sor, key) in lista">
-            <td v-for="elem in Object.entries(sor)">
-              <span v-if="elem[0]==='_id'">
-                {{key+1}}
+            <th>
+              {{key+1}}
+            </th>
+            <td v-for="elem in listview">
+              <span v-if="elem.key==='irsz'">
+                {{sor[elem.key] + ' - ' + idx(sor[elem.key])}}
               </span>
-              <span v-else-if="elem[0]==='irsz'">
-                {{elem[1] + ' - ' + idx(elem[1])}}
-              </span>
-              <span v-else-if="elem[0]==='tel'">
+              <span v-else-if="elem.key==='tel'">
                 {{
                     '+36 (' +
-                    elem[1].slice(0,2) +
+                    sor[elem.key].slice(0,2) +
                     ') ' +
-                    elem[1].slice(2,5) + '-' +
-                    elem[1].slice(5,7) + '-' +
-                    elem[1].slice(7,9)
+                    sor[elem.key].slice(2,5) + '-' +
+                    sor[elem.key].slice(5,7) + '-' +
+                    sor[elem.key].slice(7,9)
                 }}
               </span>
               <span v-else>
-                {{elem[1]}}
+                {{sor[elem.key]}}
               </span>
             </td>
             <td>
@@ -103,7 +103,11 @@ export default {
     szuro: '',
     o: {},
     t: [],
-    view: 'list'
+    view: 'list',
+    listview: [
+      { key: 'irsz', mn : 'Irányítószám' },
+      { key: 'tel', mn : 'Telefonszám' }
+    ]
   }),
   methods: {
     ment() {
