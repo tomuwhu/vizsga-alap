@@ -21,6 +21,9 @@ export default {
   }),
   methods: {
     f() {
+      if ( !Number(this.o.irsz) ||
+            Number(this.o.irsz) >  9999
+      ) this.o.irsz = this.o.irsz.slice(0,-1)
       let x = this.idb
                   .find( v =>
                          v.irsz === this.o.irsz
