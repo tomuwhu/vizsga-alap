@@ -54,25 +54,28 @@
                  small
                  v-if  = "hkb"
                 @click = "o = sor, view='reszl'"
-                 class = "g green--text">
-              <i class = "material-icons">
-              dvr
+                 class = "g orange--text">
+              <i class = "material-icons"
+                 title = "Részletek megjelenítése">
+                 dvr
               </i>
               </span>
               <span
                  small
                 @click = "o = sor, view='form'"
                  class = "g green--text">
-              <i class = "material-icons">
-              {{editic}}
+              <i class = "material-icons"
+                 title = "Szerkesztés, módosítás">
+                 {{editic}}
               </i>
               </span>
               <span
                  small
                  class = "g red--text"
                 @click = "töröl(sor)">
-              <i class = "material-icons">
-              {{deleteic}}
+              <i class = "material-icons"
+                 title = "Törlés">
+                 {{deleteic}}
               </i>
               </span>
             </td>
@@ -267,18 +270,13 @@ export default {
 
 /* - Szerkeszthető rész kezdete */
 span.g {
-  padding-top:    15px;
-  padding-bottom: 0px;
-  padding-left:   4px;
-  padding-right:  4px;
-  margin-right:   9px;
-  margin-left:    9px;
+  margin-right:   4px;
+  margin-left:    4px;
   cursor:         pointer;
-  box-shadow: 1px 1px 6px;
+  text-shadow: 1px 1px 4px #aaa;
 }
 span.g:hover {
-  box-shadow: 1px 1px 1px;
-  background-color: #adedad
+  text-shadow: 1px 1px 1px black;
 }
 td,th {
   font-size: 13px;
