@@ -29,54 +29,56 @@
           </i>
           </v-btn>
         </v-layout>
-        <table class="table" v-if="t.length">
+        <div xs-text-center>
+        <table class="table" v-if="t.length" style="margin:0 auto;">
           <tr>
             <th>#</th>
-            <th v-for="elem in listv2">
+            <th v-for="elem in listv2" :style="'text-align: '+elem.align">
               <span>{{elem.mn}}</span>
             </th>
             <th>
-              Adatok <span v-if="hkb" >Megjelenítése /</span> Módosítása / Törlése
+              Műveletek
             </th>
           </tr>
           <tr v-for="(sor, key) in lista">
             <th>
               {{key+1}}
             </th>
-            <td v-for="elem in listv2">
+            <td v-for="elem in listv2" :style="'text-align: '+elem.align">
               <span>
                 {{ mask( sor[elem.key], elem.mask ) }}
               </span>
             </td>
             <td>
-              <v-btn
+              <span
                  small
                  v-if  = "hkb"
                 @click = "o = sor, view='reszl'"
-                 class = "green--text">
+                 class = "g green--text">
               <i class = "material-icons">
               dvr
               </i>
-              </v-btn>
-              <v-btn
+              </span>
+              <span
                  small
                 @click = "o = sor, view='form'"
-                 class = "green--text">
+                 class = "g green--text">
               <i class = "material-icons">
               {{editic}}
               </i>
-              </v-btn>
-              <v-btn
+              </span>
+              <span
                  small
-                 class = "red--text"
+                 class = "g red--text"
                 @click = "töröl(sor)">
               <i class = "material-icons">
               {{deleteic}}
               </i>
-              </v-btn>
+              </span>
             </td>
           </tr>
         </table>
+        </div>
         <hr>
         <v-btn @click="view='form',o={}">Új elem</v-btn>
       </div>
@@ -123,10 +125,12 @@ var kiírás = 'Példa nyilvántartás'
 var adatstuktúra = [
   { key:    'nev',
     mn :    'Név',
+    align:  'left',
     counter: 30
   },
   { key:    'szakma',
     mn :    'Szakma',
+    align:  'left',
     items: [
             'Ács',
             'Asztalos',
@@ -262,11 +266,24 @@ export default {
 <style>
 
 /* - Szerkeszthető rész kezdete */
-.table {
-  width: 100%;
+span.g {
+  padding-top:    15px;
+  padding-bottom: 0px;
+  padding-left:   4px;
+  padding-right:  4px;
+  margin-right:   9px;
+  margin-left:    9px;
+  cursor:         pointer;
+  box-shadow: 1px 1px 6px;
 }
-td {
-  font-size: 16px;
+span.g:hover {
+  box-shadow: 1px 1px 1px;
+  background-color: #adedad
+}
+td,th {
+  font-size: 13px;
+  padding-left:10px;
+  padding-right:10px;
 }
 .i1 {
   width:200px;
