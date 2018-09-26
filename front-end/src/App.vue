@@ -3,7 +3,7 @@
       <h1>{{kiiras}}</h1>
       <div class="c1" v-if="view=='reszl'">
         <v-layout row v-for="elem in listview">
-          <v-flex text-xs-right xs6>
+          <v-flex text-xs-right xs6 reszl>
             <b>{{elem.mn}}:</b>
           </v-flex>
           <v-flex  text-xs-left xs6>
@@ -11,8 +11,10 @@
             <i>{{ mask( o[elem.key], elem.mask ) }}</i>
           </v-flex>
         </v-layout>
-        <v-btn @click = "view='form'">Szerkeszt</v-btn>
-        <v-btn @click="view='list'">Bezár</v-btn>
+        <br>
+        <hr>
+        <v-btn @click = "view='form'" class="white--text pink">Szerkeszt</v-btn>
+        <v-btn @click="view='list'" class="white--text blue">Bezár</v-btn>
       </div>
       <div class="c1" v-if="view=='list'">
         <v-layout row>
@@ -83,7 +85,7 @@
         </table>
         </div>
         <hr>
-        <v-btn @click="view='form',o={}">Új elem</v-btn>
+        <v-btn @click="view='form',o={}" class="white--text deep-orange">Új elem</v-btn>
       </div>
       <div class="c1" v-if="view=='form'">
           <div v-for="elem in listview">
@@ -103,9 +105,9 @@
             v-model  = "o[elem.key]"
           />
           </div>
-          <v-btn @click="view='list'">Mégse</v-btn>
+          <v-btn @click="view='list'" class="white--text orange">Mégse</v-btn>
             &nbsp;
-          <v-btn @click="ment">Ment</v-btn>
+          <v-btn @click="ment" class="white--text green">Ment</v-btn>
       </div>
   </v-app>
 </template>
@@ -115,7 +117,7 @@
 /// - Szerkeszthető rész kezdete
 
 // Oldal címsor
-var kiírás = 'Példa nyilvántartás'
+const kiírás = 'Példa nyilvántartás'
 
 // Adatstruktúra és beviteli maszkők - kötelező kitölteni!
 // A megadottak csak mnták, a nem szükségeseket törölni kell.
@@ -125,7 +127,7 @@ var kiírás = 'Példa nyilvántartás'
     A: nagy betű
     a többi karakter a maszk része
 */
-var adatstuktúra = [
+const adatstuktúra = [
   { key:    'nev',
     mn :    'Név',
     align:  'left',
@@ -269,6 +271,9 @@ export default {
 <style>
 
 /* - Szerkeszthető rész kezdete */
+.reszl {
+  font-size: 15px;
+}
 span.g {
   margin-right:   4px;
   margin-left:    4px;
