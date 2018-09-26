@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>Példa nyilvántartás</h1>
+      <h1>{{kiiras}} nyilvántartás</h1>
       <div class="c1" v-if="view=='list'">
         <v-layout row>
           <v-text-field
@@ -38,7 +38,7 @@
                 @click = "o = sor, view='form'"
                  class = "green--text">
               <i class = "material-icons">
-              edit
+              {{editic}}
               </i>
               </v-btn>
               <v-btn
@@ -46,7 +46,7 @@
                  class = "red--text"
                 @click = "töröl(sor)">
               <i class = "material-icons">
-              delete
+              {{deleteic}}
               </i>
               </v-btn>
             </td>
@@ -56,7 +56,6 @@
         <v-btn @click="view='form',o={}">Új elem</v-btn>
       </div>
       <div class="c1" v-if="view=='form'">
-          <!-- Példa form -->
           <div v-for="elem in listview">
           <v-select
             v-if     = "elem.items"
@@ -77,12 +76,35 @@
           <v-btn @click="view='list'">Mégse</v-btn>
             &nbsp;
           <v-btn @click="ment">Ment</v-btn>
-          <!-- példa vége -->
       </div>
   </v-app>
 </template>
 
 <script>
+
+/// - Szerkeszthető rész kezdete
+
+var kiírás = 'Példa'
+
+var adatstuktúra = [
+  { key: 'nev', mn : 'Név', counter:30 },
+  { key: 'szakma', mn : 'Szakma', items: ['Ács', 'Asztalos', 'Burkoló', 'Kőműves', 'Villanyszerelő', 'Vízvezetékszerelő']  },
+  { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##', counter:9 }
+]
+
+var szuresrendez = [
+  'nev',
+  'szakma'
+]
+
+var editicon = 1    //1..3
+
+var deleteicon = 1  //1..5
+
+/// - Szerkeszthető rész vége
+
+const editiconlist = ['edit', 'build', 'update']
+const deleteiconlist = ['delete', 'backspace', 'delete_sweep', 'remove', 'remove_circle', 'cancel']
 const logger = false
 const backend = 'http://localhost:3000/'
 export default {
@@ -92,12 +114,11 @@ export default {
     o: {},
     t: [],
     view: 'list',
-    listview: [
-      { key: 'nev', mn : 'Név', counter:30 },
-      { key: 'szakma', mn : 'Szakma', items: ['Ács', 'Asztalos', 'Burkoló', 'Kőműves', 'Villanyszerelő', 'Vízvezetékszerelő']  },
-      { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##', counter:9 }
-    ],
-    szures: ['nev','szakma']
+    listview: adatstuktúra,
+    szures: szuresrendez,
+    kiiras: kiírás,
+    editic:editiconlist[editicon-1],
+    deleteic:deleteiconlist[deleteicon-1]
   }),
   methods: {
     backmask( a, m ) {
@@ -110,7 +131,6 @@ export default {
         })
         return s
       } else return a
-
     },
     ment() {
       this
@@ -174,6 +194,8 @@ export default {
 </script>
 
 <style>
+
+/* - Szerkeszthető rész kezdete */
 .table {
   width: 100%;
 }
@@ -204,4 +226,6 @@ h1 {
   height:90%;
   background-color: white;
 }
+/* - Szerkeszthető rész vége */
+
 </style>
