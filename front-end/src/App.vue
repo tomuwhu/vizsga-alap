@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>Példa nyilvántartás</h1>
+      <h1>Intézmény nyilvántartás</h1>
       <div class="c1" v-if="view=='list'">
         <v-layout row>
           <v-text-field
