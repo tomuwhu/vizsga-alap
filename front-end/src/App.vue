@@ -165,9 +165,9 @@ const config = {
     'szakma'
   ],
 
-  editicon: 1,      //1..3
+  editicon: 3,      //1..3
 
-  deleteicon: 1,     //1..5
+  deleteicon: 3,     //1..5
 
   logger: false     //debugoláshoz érdemes true-ra állítani
 }
