@@ -7,7 +7,7 @@ const mdb = ( mongo =
                  require('mongodb') )   .MongoClient
 const ObjectId        =   mongo         .ObjectID
 const database_name   =  'vizsga'
-const collection_name =  'example'
+const collection_name =  'minimal'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
 const logger          =   false

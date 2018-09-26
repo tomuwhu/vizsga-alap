@@ -28,18 +28,7 @@
               {{key+1}}
             </th>
             <td v-for="elem in listview">
-              <span v-if="elem.key==='irsz'">
-                {{sor[elem.key] + ', ' + idx(sor[elem.key])}}
-              </span>
-              <span v-else-if="elem.key==='tel'">
-                {{ '+36 (' +
-                    sor[elem.key].slice(0,2) + ') '+
-                    sor[elem.key].slice(2,5) + '-' +
-                    sor[elem.key].slice(5,7) + '-' +
-                    sor[elem.key].slice(7,9)
-                }}
-              </span>
-              <span v-else>
+              <span>
                 {{sor[elem.key]}}
               </span>
             </td>
@@ -70,20 +59,11 @@
           <!-- Példa form -->
           <v-text-field
             class="i1"
-            label="Irányítószám"
-            counter = "4"
-            mask = "####"
-            v-model="o.irsz"
-          />
-          <br>
-          <h2 class="i1">{{varos}}</h2>
-          <br>
-          <v-text-field
-            class="i1"
-            label="Telefonszám"
-            counter = "9"
-            mask = "(##) ###-##-##"
-            v-model="o.tel"
+            v-for="elem in listview"
+            :label="elem.mn"
+            :counter = "elem.counter"
+            :mask = "elem.mask"
+            :v-model="'o.'+elem.key"
           />
           <v-btn @click="view='list'">Mégse</v-btn>
             &nbsp;
@@ -104,9 +84,10 @@ export default {
     t: [],
     view: 'list',
     listview: [
-      { key: 'irsz', mn : 'Irányítószám, Település' },
-      { key: 'tel', mn : 'Telefonszám' }
-    ]
+      { key: 'nev', mn : 'Név', counter:30 },
+      { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##' }
+    ],
+    szures: 'nev'
   }),
   methods: {
     ment() {
@@ -148,9 +129,9 @@ export default {
       return this
               .t
               .filter( v =>
-                new RegExp(this.szuro,'i').test( this.idx(v.irsz) )
+                new RegExp(this.szuro,'i').test( v[this.szures] )
               )
-              .sort( (a,b) => this.idx(a.irsz).localeCompare(this.idx(b.irsz)) )
+              .sort( (a,b) => a[this.szures].localeCompare(b[this.szures]) )
               .slice(0,10)
     }
   },
