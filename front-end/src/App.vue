@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>{{kiiras}} nyilvántartás</h1>
+      <h1>{{kiiras}}</h1>
       <div class="c1" v-if="view=='list'">
         <v-layout row>
           <v-text-field
@@ -84,28 +84,56 @@
 
 /// - Szerkeszthető rész kezdete
 
-var kiírás = 'Példa'
+// Oldal címsor
+var kiírás = 'Példa nyilvántartás'
 
+// Adatstruktúra és beviteli maszkők - kötelező kitölteni!
+// A megadottak csak mnták, a nem szükségeseket törölni kell.
+/* mask (maszk) jelölések:
+    #: szám
+    a: kis betű
+    A: nagy betű
+    a többi karakter a maszk része
+*/
 var adatstuktúra = [
-  { key: 'nev', mn : 'Név', counter:30 },
-  { key: 'szakma', mn : 'Szakma', items: ['Ács', 'Asztalos', 'Burkoló', 'Kőműves', 'Villanyszerelő', 'Vízvezetékszerelő']  },
-  { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##', counter:9 }
+  { key: 'nev',
+    mn : 'Név',
+    counter:30
+  },
+  { key: 'szakma',
+    mn : 'Szakma',
+    items: [
+        'Ács',
+        'Asztalos',
+        'Burkoló',
+        'Kőműves',
+        'Villanyszerelő',
+        'Vízvezetékszerelő'
+    ]
+  },
+  { key: 'tel',
+    mn : 'Telefonszám',
+    mask:'(##) ###-##-##',
+    counter:9
+  }
 ]
 
+// Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
 var szuresrendez = [
   'nev',
   'szakma'
 ]
 
-var editicon = 1    //1..3
+var editicon = 1      //1..3
 
-var deleteicon = 1  //1..5
+var deleteicon = 1    //1..5
+
+const logger = false  //debugoláshoz érdemes true-ra állítani
 
 /// - Szerkeszthető rész vége
 
 const editiconlist = ['edit', 'build', 'update']
 const deleteiconlist = ['delete', 'backspace', 'delete_sweep', 'remove', 'remove_circle', 'cancel']
-const logger = false
 const backend = 'http://localhost:3000/'
 export default {
   props: ['idx'],
