@@ -1,6 +1,19 @@
 <template>
   <v-app id="app">
       <h1>{{kiiras}}</h1>
+      <div class="c1" v-if="view=='reszl'">
+        <v-layout row v-for="elem in listview">
+          <v-flex text-xs-right xs6>
+            <b>{{elem.mn}}:</b>
+          </v-flex>
+          <v-flex  text-xs-left xs6>
+            &nbsp;
+            <i>{{ mask( o[elem.key], elem.mask ) }}</i>
+          </v-flex>
+        </v-layout>
+        <v-btn @click = "view='form'">Szerkeszt</v-btn>
+        <v-btn @click="view='list'">Bezár</v-btn>
+      </div>
       <div class="c1" v-if="view=='list'">
         <v-layout row>
           <v-text-field
@@ -23,7 +36,7 @@
               <span>{{elem.mn}}</span>
             </th>
             <th>
-              Módosít / Töröl
+              Adatok <span v-if="hkb" >Megjelenítése /</span> Módosítása / Törlése
             </th>
           </tr>
           <tr v-for="(sor, key) in lista">
@@ -36,6 +49,15 @@
               </span>
             </td>
             <td>
+              <v-btn
+                 small
+                 v-if  = "hkb"
+                @click = "o = sor, view='reszl'"
+                 class = "green--text">
+              <i class = "material-icons">
+              dvr
+              </i>
+              </v-btn>
               <v-btn
                  small
                 @click = "o = sor, view='form'"
@@ -99,30 +121,30 @@ var kiírás = 'Példa nyilvántartás'
     a többi karakter a maszk része
 */
 var adatstuktúra = [
-  { key: 'nev',
-    mn : 'Név',
-    counter:30
+  { key:    'nev',
+    mn :    'Név',
+    counter: 30
   },
-  { key: 'szakma',
-    mn : 'Szakma',
+  { key:    'szakma',
+    mn :    'Szakma',
     items: [
-        'Ács',
-        'Asztalos',
-        'Burkoló',
-        'Kőműves',
-        'Villanyszerelő',
-        'Vízvezetékszerelő'
+            'Ács',
+            'Asztalos',
+            'Burkoló',
+            'Kőműves',
+            'Villanyszerelő',
+            'Vízvezetékszerelő'
     ]
   },
-  { key: 'tel',
-    mn : 'Telefonszám',
-    mask:'(##) ###-##-##',
-    counter:9
+  { key:    'tel',
+    mn :    'Telefonszám',
+    mask:   '(##) ###-##-##',
+    counter: 9
   },
-  { key: 'szig',
-    mn : 'Személyi igazolvány száma',
-    mask:'######AA',
-    counter:8
+  { key:    'szig',
+    mn :    'Személyi igazolvány száma',
+    mask:   '######AA',
+    counter: 8
   }
 ]
 
@@ -157,7 +179,8 @@ export default {
     szures: szuresrendez,
     kiiras: kiírás,
     editic:editiconlist[editicon-1],
-    deleteic:deleteiconlist[deleteicon-1]
+    deleteic:deleteiconlist[deleteicon-1],
+    hkb: hidedkeys.length
   }),
   methods: {
     mask( a, m ) {
