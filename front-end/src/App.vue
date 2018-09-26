@@ -63,7 +63,7 @@
             :label="elem.mn"
             :counter = "elem.counter"
             :mask = "elem.mask"
-            :v-model="'o.'+elem.key"
+            v-model="o[elem.key]"
           />
           <v-btn @click="view='list'">Mégse</v-btn>
             &nbsp;
