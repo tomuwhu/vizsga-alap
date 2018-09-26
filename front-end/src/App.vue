@@ -178,7 +178,7 @@ const editiconlist = ['edit', 'build', 'update']
 const deleteiconlist = ['delete', 'backspace', 'delete_sweep', 'remove', 'remove_circle', 'cancel']
 const backend = 'http://localhost:3000/'
 export default {
-  props: ['idx'],
+  props: ['idx'], //idx a public method
   data: () => ({
     szuro: '',
     o: {},
