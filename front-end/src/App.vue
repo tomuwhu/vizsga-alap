@@ -85,7 +85,7 @@ export default {
     view: 'list',
     listview: [
       { key: 'nev', mn : 'Név', counter:30 },
-      { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##' }
+      { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##', counter:9 }
     ],
     szures: 'nev'
   }),
