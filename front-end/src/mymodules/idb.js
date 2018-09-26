@@ -2992,5 +2992,4 @@ const idb = [
 ]
 const idm = new Map()
 idb.forEach( e => idm.set( e.irsz, e.helyseg ) )
-const idx = a => idm.get(a)
-export { idx } //idx a public method
+exports.idx = a => idm.get(a) //idx a public method
