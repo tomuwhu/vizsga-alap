@@ -19,17 +19,20 @@
         <table class="table" v-if="t.length">
           <tr>
             <th>#</th>
-            <th v-for="elem in listview">
+            <th v-for="elem in listv2">
               <span>{{elem.mn}}</span>
+            </th>
+            <th>
+              Módosít / Töröl
             </th>
           </tr>
           <tr v-for="(sor, key) in lista">
             <th>
               {{key+1}}
             </th>
-            <td v-for="elem in listview">
+            <td v-for="elem in listv2">
               <span>
-                {{ backmask( sor[elem.key], elem.mask ) }}
+                {{ mask( sor[elem.key], elem.mask ) }}
               </span>
             </td>
             <td>
@@ -115,8 +118,16 @@ var adatstuktúra = [
     mn : 'Telefonszám',
     mask:'(##) ###-##-##',
     counter:9
+  },
+  { key: 'szig',
+    mn : 'Személyi igazolvány száma',
+    mask:'######AA',
+    counter:8
   }
 ]
+
+// rejtett mezők - lista nézetben nem látszanak
+const hidedkeys = ['szig']
 
 // Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
 var szuresrendez = [
@@ -149,7 +160,8 @@ export default {
     deleteic:deleteiconlist[deleteicon-1]
   }),
   methods: {
-    backmask( a, m ) {
+    mask( a, m ) {
+      if (!a) return '-'
       if (m) {
         let s = '', i = 0
         m.split('').forEach(v => {
@@ -207,6 +219,9 @@ export default {
               } )
               .sort( (a,b) => a[this.szures[0]] ? a[this.szures[0]].localeCompare(b[this.szures[0]]) : 1 )
               .slice(0,10)
+    },
+    listv2() {
+      return this.listview.filter( v => !hidedkeys.includes(v.key) )
     }
   },
   mounted() {
