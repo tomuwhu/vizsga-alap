@@ -4,14 +4,14 @@
       <div class="c1" v-if="view=='list'">
         <v-layout row>
           <v-text-field
-              label="Keresés / Szűrés"
-              v-model="szuro"/>
+              label = "Keresés / Szűrés"
+              v-model = "szuro"/>
           <v-btn
-             v-if="szuro"
+             v-if  = "szuro"
              small
-            @click="szuro=''"
-             class="red--text">
-          <i class="material-icons">
+            @click = "szuro=''"
+             class = "red--text">
+          <i class = "material-icons">
           clear
           </i>
           </v-btn>
@@ -35,9 +35,9 @@
             <td>
               <v-btn
                  small
-                @click="o = sor, view='form'"
-                 class="green--text">
-              <i class="material-icons">
+                @click = "o = sor, view='form'"
+                 class = "green--text">
+              <i class = "material-icons">
               edit
               </i>
               </v-btn>
@@ -57,14 +57,23 @@
       </div>
       <div class="c1" v-if="view=='form'">
           <!-- Példa form -->
-          <v-text-field
-            class="i1"
-            v-for="elem in listview"
-            :label="elem.mn"
-            :counter = "elem.counter"
-            :mask = "elem.mask"
-            v-model="o[elem.key]"
+          <div v-for="elem in listview">
+          <v-select
+            v-if     = "elem.items"
+            class    = "i1"
+            :items   = "elem.items"
+            :label   = "elem.mn"
+            v-model  = "o[elem.key]"
           />
+          <v-text-field
+            v-else
+            class    = "i1"
+            :label   = "elem.mn"
+            :counter = "elem.counter"
+            :mask    = "elem.mask"
+            v-model  = "o[elem.key]"
+          />
+          </div>
           <v-btn @click="view='list'">Mégse</v-btn>
             &nbsp;
           <v-btn @click="ment">Ment</v-btn>
@@ -85,9 +94,10 @@ export default {
     view: 'list',
     listview: [
       { key: 'nev', mn : 'Név', counter:30 },
+      { key: 'szakma', mn : 'Szakma', items: ['Ács', 'Asztalos', 'Burkoló', 'Kőműves', 'Villanyszerelő', 'Vízvezetékszerelő']  },
       { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##', counter:9 }
     ],
-    szures: 'nev'
+    szures: ['nev','szakma']
   }),
   methods: {
     ment() {
@@ -128,10 +138,14 @@ export default {
     lista() {
       return this
               .t
-              .filter( v =>
-                new RegExp(this.szuro,'i').test( v[this.szures] )
-              )
-              .sort( (a,b) => a[this.szures].localeCompare(b[this.szures]) )
+              .filter( v => {
+                let q = false
+                this.szures.forEach( szuro => {
+                  if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
+                })
+                return q
+              } )
+              .sort( (a,b) => a[this.szures[0]].localeCompare(b[this.szures[0]]) )
               .slice(0,10)
     }
   },
