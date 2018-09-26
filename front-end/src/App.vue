@@ -115,65 +115,65 @@
 <script>
 
 /// - Szerkeszthető rész kezdete
+const config = {
+  // Oldal címsor
+  kiírás: 'Példa nyilvántartás',
+  // Adatstruktúra és beviteli maszkők - kötelező kitölteni!
+  // A megadottak csak mnták, a nem szükségeseket törölni kell.
+  /* mask (maszk) jelölések:
+      #: szám
+      a: kis betű
+      A: nagy betű
+      a többi karakter a maszk része
+  */
+  adatstuktúra: [
+    { key:    'nev',
+      mn :    'Név',
+      align:  'left',
+      counter: 30
+    },
+    { key:    'szakma',
+      mn :    'Szakma',
+      align:  'left',
+      items: [
+              'Ács',
+              'Asztalos',
+              'Burkoló',
+              'Kőműves',
+              'Villanyszerelő',
+              'Vízvezetékszerelő'
+      ]
+    },
+    { key:    'tel',
+      mn :    'Telefonszám',
+      mask:   '(##) ###-##-##',
+      counter: 9
+    },
+    { key:    'szig',
+      mn :    'Személyi igazolvány száma',
+      mask:   '######AA',
+      counter: 8
+    }
+  ],
 
-// Oldal címsor
-const kiírás = 'Példa nyilvántartás'
+  // rejtett mezők - lista nézetben nem látszanak
+  hidedkeys: ['szig'],
 
-// Adatstruktúra és beviteli maszkők - kötelező kitölteni!
-// A megadottak csak mnták, a nem szükségeseket törölni kell.
-/* mask (maszk) jelölések:
-    #: szám
-    a: kis betű
-    A: nagy betű
-    a többi karakter a maszk része
-*/
-const adatstuktúra = [
-  { key:    'nev',
-    mn :    'Név',
-    align:  'left',
-    counter: 30
-  },
-  { key:    'szakma',
-    mn :    'Szakma',
-    align:  'left',
-    items: [
-            'Ács',
-            'Asztalos',
-            'Burkoló',
-            'Kőműves',
-            'Villanyszerelő',
-            'Vízvezetékszerelő'
-    ]
-  },
-  { key:    'tel',
-    mn :    'Telefonszám',
-    mask:   '(##) ###-##-##',
-    counter: 9
-  },
-  { key:    'szig',
-    mn :    'Személyi igazolvány száma',
-    mask:   '######AA',
-    counter: 8
-  }
-]
+  // Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
+  szuresrendez: [
+    'nev',
+    'szakma'
+  ],
 
-// rejtett mezők - lista nézetben nem látszanak
-const hidedkeys = ['szig']
+  editicon: 1,      //1..3
 
-// Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
-var szuresrendez = [
-  'nev',
-  'szakma'
-]
+  deleteicon: 1,     //1..5
 
-var editicon = 1      //1..3
-
-var deleteicon = 1    //1..5
-
-const logger = false  //debugoláshoz érdemes true-ra állítani
-
+  logger: false     //debugoláshoz érdemes true-ra állítani
+}
 /// - Szerkeszthető rész vége
 
+const logger = config.logger
 const editiconlist = ['edit', 'build', 'update']
 const deleteiconlist = ['delete', 'backspace', 'delete_sweep', 'remove', 'remove_circle', 'cancel']
 const backend = 'http://localhost:3000/'
@@ -184,12 +184,12 @@ export default {
     o: {},
     t: [],
     view: 'list',
-    listview: adatstuktúra,
-    szures: szuresrendez,
-    kiiras: kiírás,
-    editic:editiconlist[editicon-1],
-    deleteic:deleteiconlist[deleteicon-1],
-    hkb: hidedkeys.length
+    listview: config.adatstuktúra,
+    szures:   config.szuresrendez,
+    kiiras:   config.kiírás,
+    editic:   editiconlist[config.editicon-1],
+    deleteic: deleteiconlist[config.deleteicon-1],
+    hkb:      config.hidedkeys.length
   }),
   methods: {
     mask( a, m ) {
@@ -253,7 +253,7 @@ export default {
               .slice(0,10)
     },
     listv2() {
-      return this.listview.filter( v => !hidedkeys.includes(v.key) )
+      return this.listview.filter( v => !config.hidedkeys.includes(v.key) )
     }
   },
   mounted() {
