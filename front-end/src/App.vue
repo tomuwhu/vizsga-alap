@@ -84,10 +84,19 @@ export default {
     t: [],
     view: 'list',
     listview: [
-      { key: 'nev', mn : 'Név', counter:30 },
+/*
+Intézmény név, Intézmény típusa, Nyilvántartási szám, Képviseli, Levelezési cím, Központi telefonszám,
+*/
+      { key: 'inev', mn : 'Intézménynév', counter:30 },
+      { key: 'itip', mn : 'Intézménytípus', counter:30 },
+      { key: 'nytsz', mn : 'Nyílvántartási szám', counter:30 },
+      { key: 'kepv', mn : 'Képviseli', counter:30 },
+      { key: 'levcir', mn : 'Levelezési cím - Irányítószám', counter:30 },
+      { key: 'varos', mn : 'Levelezési cím - Város', counter:30 },
+      { key: 'cimsor', mn : 'Levelezési cím -Utca / házszám', counter:30 },
       { key: 'tel', mn : 'Telefonszám', mask:'(##) ###-##-##', counter:9 }
     ],
-    szures: 'nev'
+    szures: 'itip'
   }),
   methods: {
     ment() {
@@ -163,14 +172,14 @@ td {
   box-shadow: 1px 1px 4px;
   border-radius: 12px;
   padding:20px;
-  background-color: #efedde;
+  background-color: #efcdde;
 }
 h1 {
   box-shadow: 1px 1px 4px;
   border-radius: 12px;
   padding:20px;
   margin-bottom: 23px;
-  background-color: #dfedde;
+  background-color: #cfedde;
 }
 #app {
   margin: 20px;
