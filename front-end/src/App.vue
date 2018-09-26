@@ -29,7 +29,7 @@
             </th>
             <td v-for="elem in listview">
               <span>
-                {{sor[elem.key]}}
+                {{ backmask( sor[elem.key], elem.mask ) }}
               </span>
             </td>
             <td>
@@ -100,6 +100,18 @@ export default {
     szures: ['nev','szakma']
   }),
   methods: {
+    backmask( a, m ) {
+      if (m) {
+        let s = '', i = 0
+        m.split('').forEach(v => {
+          if ( '#AanNX'.includes(v) ) {
+            s += a[i++]
+          } else s += v
+        })
+        return s
+      } else return a
+
+    },
     ment() {
       this
         .axios
@@ -145,7 +157,7 @@ export default {
                 })
                 return q
               } )
-              .sort( (a,b) => a[this.szures[0]].localeCompare(b[this.szures[0]]) )
+              .sort( (a,b) => a[this.szures[0]] ? a[this.szures[0]].localeCompare(b[this.szures[0]]) : 1 )
               .slice(0,10)
     }
   },
