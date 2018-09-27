@@ -57,6 +57,15 @@ app   .post( /save/, ( req, res ) => {
               }
 } )
 
+app   .get( /del/, ( req, res ) => {
+              db  ? db .collection( collection_name  )
+                       .remove( {} )
+                       .then( v=>
+                         res.send(v)
+                       )
+                  : res.send( { error: -1 } )
+} )
+
 app   .post( /del/, ( req, res ) => {
               logger ? console.log(req.body) : 1
               db  ? db .collection( collection_name  )

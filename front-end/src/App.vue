@@ -135,6 +135,15 @@
             &nbsp;
           <v-btn @click="ment" class="white--text green">Ment</v-btn>
       </div>
+      <div style="text-align:right;">Adatbázis ürítése
+        <v-btn @click="deleteall"
+             title="adatbázis ürítése"
+             fab dark small
+             color="red">
+          <v-icon
+             rounded>pan_tool</v-icon>
+        </v-btn>
+      </div>
   </v-app>
 </template>
 
@@ -260,6 +269,16 @@ export default {
             this.t = this.t.filter( v =>
               v._id != ezt._id
             )
+          }
+        } )
+    },
+    deleteall() {
+      this
+        .axios
+        .get( backend + 'del' )
+        .then( v => {
+          if (v.data.n) {
+            this.t = []
           }
         } )
     }
