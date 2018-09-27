@@ -3,13 +3,24 @@
       <h1>{{kiiras}} - {{idx('6725')}}</h1>
       <div class="c1" v-if="view=='reszl'">
         <v-layout row v-for="elem in listview">
-          <v-flex text-xs-right xs6 reszl>
-            <b>{{elem.mn}}:</b>
+          <v-flex
+             v-if     = "elem.type==='rating'">
+          <v-rating
+             v-model  = "o[elem.key]"
+             color    = "red darken-3"
+             half-increments
+             readonly
+             />
           </v-flex>
-          <v-flex  text-xs-left xs6>
-            &nbsp;
-            <i>{{ mask( o[elem.key], elem.mask ) }}</i>
-          </v-flex>
+          <v-layout row v-else>
+            <v-flex text-xs-right xs6 reszl>
+              <b>{{elem.mn}}:</b>
+            </v-flex>
+            <v-flex  text-xs-left xs6>
+              &nbsp;
+              <i>{{ mask( o[elem.key], elem.mask ) }}</i>
+            </v-flex>
+          </v-layout>
         </v-layout>
         <br>
         <hr>
@@ -36,7 +47,10 @@
           <tr>
             <th>#</th>
             <th v-for="elem in listv2" :style="'text-align: '+elem.align">
-              <span>{{elem.mn}}</span>
+              <span v-if="elem.type==='rating'">
+                <i class="material-icons">star_half</i>
+              </span>
+              <span v-else>{{elem.mn}}</span>
             </th>
             <th>
               Műveletek
@@ -89,15 +103,21 @@
       </div>
       <div class="c1" v-if="view=='form'">
           <div v-for="elem in listview">
+          <v-rating
+            v-if     = "elem.type==='rating'"
+            v-model  = "o[elem.key]"
+            color    = "red darken-3"
+            half-increments
+            hover />
           <v-select
-            v-if     = "elem.items"
+            v-else-if= "elem.items"
             class    = "i1"
             :items   = "elem.items"
             :label   = "elem.mn"
             v-model  = "o[elem.key]"
           />
           <v-text-field
-            v-else
+            v-else-if= "elem.type!=='rating'"
             class    = "i1"
             :label   = "elem.mn"
             :counter = "elem.counter"
@@ -148,6 +168,9 @@ const config = {
       mn :    'Telefonszám',
       mask:   '(##) ###-##-##',
       counter: 9
+    },
+    { key:    'ert',
+      type:   'rating',
     },
     { key:    'szig',
       mn :    'Személyi igazolvány száma',
