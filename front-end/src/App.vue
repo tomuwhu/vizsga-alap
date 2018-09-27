@@ -135,7 +135,7 @@
             &nbsp;
           <v-btn @click="ment" class="white--text green">Ment</v-btn>
       </div>
-      <div style="text-align:right;">Adatbázis ürítése
+      <div class="devtool">Adatbázis ürítése
         <v-btn @click="deleteall"
              title="adatbázis ürítése"
              fab dark small
@@ -375,6 +375,16 @@ h1 {
   text-align: center;
   height:90%;
   background-color: white;
+}
+.devtool {
+  visibility: hidden;
+  text-align:right;
+  color:red;
+  box-shadow: 1px 1px 4px gray;
+  border-radius: 12px;
+  padding:5px;
+  margin-top:15px;
+  background-color: #efedde;
 }
 /* - Szerkeszthető rész vége */
 
