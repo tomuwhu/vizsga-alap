@@ -100,8 +100,11 @@
         <br>
         </div>
         <hr>
-        <v-btn @click="view='form',o={}" fab dark small color="pink">
-            <v-icon dark>add</v-icon>
+        <v-btn @click="view='form',o={}"
+               fab dark small
+               color="red">
+            <v-icon
+               dark>add</v-icon>
         </v-btn>
       </div>
       <div class="c1" v-if="view=='form'">
