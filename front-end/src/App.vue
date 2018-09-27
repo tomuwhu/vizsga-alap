@@ -377,7 +377,7 @@ h1 {
   background-color: white;
 }
 .devtool {
-  visibility: hidden;
+  visibility: hidden; /* set visibility to visible to show dev tools */
   text-align:right;
   color:red;
   box-shadow: 1px 1px 4px gray;
