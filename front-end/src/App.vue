@@ -50,10 +50,10 @@
               <span v-if="elem.type==='rating'">
                 <i class="material-icons">star_half</i>
               </span>
-              <span v-else>{{elem.mn}}</span>
+              <span v-else class="fejrow">{{elem.mn}}</span>
             </th>
             <th>
-              Műveletek
+              <span class="fejrow">Műveletek</span>
             </th>
           </tr>
           <tr v-for="(sor, key) in lista">
@@ -294,6 +294,11 @@ export default {
 <style>
 
 /* - Szerkeszthető rész kezdete */
+.fejrow {
+  font-size:16px;
+  color: #154741;
+  text-shadow: 1px 1px 4px #aaa;
+}
 .reszl {
   font-size: 15px;
 }
@@ -310,6 +315,7 @@ td,th {
   font-size: 13px;
   padding-left:10px;
   padding-right:10px;
+  color: #256761;
 }
 .i1 {
   width:200px;
