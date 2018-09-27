@@ -56,7 +56,7 @@
               <span class="fejrow">Műveletek</span>
             </th>
           </tr>
-          <tr v-for="(sor, key) in lista">
+          <tr v-for="(sor, key) in lista" :class="'row'+(key%2)">
             <th>
               {{key+1}}
             </th>
@@ -310,6 +310,16 @@ span.g {
 }
 span.g:hover {
   text-shadow: 1px 1px 1px black;
+}
+tr.row0 {
+  background-color: rgba(180, 220, 220, 0.3);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px gray;
+}
+tr.row1 {
+  background-color: rgba(220, 180, 220, 0.3);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px gray;
 }
 td,th {
   font-size: 13px;
