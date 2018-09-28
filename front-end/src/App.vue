@@ -215,7 +215,8 @@ const config = {
     },
     { key:    'cim',
       mn :    'Cím',
-      type:   'address'
+      type:   'address',
+      align:  'left'
     },
     { key:    'vtel',
       mn :    'Telefonszám',
@@ -266,7 +267,7 @@ const config = {
   ],
 
   // rejtett mezők - lista nézetben nem látszanak
-  hidedkeys: ['cim','mtel','adosz','nysz','banksz'],
+  hidedkeys: ['mtel','adosz','nysz','banksz'],
 
   // Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
   szuresrendez: [
@@ -277,9 +278,9 @@ const config = {
     '_cim'
   ],
 
-  editicon: 1,      //1..3
+  editicon: 3,      //1..3
 
-  deleteicon: 1,     //1..5
+  deleteicon: 3,     //1..5
 
   logger: false     //debugoláshoz érdemes true-ra állítani
 }
