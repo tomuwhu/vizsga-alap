@@ -466,7 +466,9 @@ td,th {
   padding:20px;
   margin-bottom: 23px;
   background-color: rgba(160, 180, 220, 0.3);
+  color: rgba(16, 80, 80, 0.8);
   font-family: 'Srisakdi', cursive;
+  text-shadow: 1px 1px 5px gray;
 }
 #app {
   font-family: 'Dosis', sans-serif;
