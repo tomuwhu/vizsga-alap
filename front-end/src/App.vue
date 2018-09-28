@@ -121,6 +121,7 @@
             :items   = "elem.items"
             :label   = "elem.mn"
             v-model  = "o[elem.key]"
+            :multiple= "elem.type"
           />
           <v-text-field
             v-else-if= "elem.type!=='rating'"
@@ -170,6 +171,7 @@ const config = {
     { key:    'szakma',
       mn :    'Szakma',
       align:  'left',
+      type:   'multiple',
       items: [
               'Ács',
               'Asztalos',
@@ -240,6 +242,8 @@ export default {
           } else s += v
         })
         return s
+      } else if ( Array.isArray(a) ) {
+        return a.join(', ')
       } else return a
     },
     ment() {
@@ -293,7 +297,12 @@ export default {
               .filter( v => {
                 let q = false
                 this.szures.forEach( szuro => {
-                  if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
+                  if ( Array.isArray(szuro) ) {
+                    szuro.forEach( szuro => {
+                      if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
+                    } )
+                  }
+                  else if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
                 })
                 return q
               } )
