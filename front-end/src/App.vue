@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>{{kiiras}} - {{idx('6725')}}</h1>
+      <h2 class="header">{{kiiras}}</h2>
       <div class="c1" v-if="view=='reszl'">
         <v-layout row v-for="elem in listview">
           <v-flex
@@ -79,7 +79,7 @@
                  class = "g orange--text">
               <i class = "material-icons"
                  title = "Részletek megjelenítése">
-                 dvr
+                 zoom_in
               </i>
               </span>
               <span
@@ -107,10 +107,9 @@
         </div>
         <hr>
         <v-btn @click="view='form',o={}"
-               fab dark small
+               dark small
                color="red">
-            <v-icon
-               dark>add</v-icon>
+            Új partner felvétele
         </v-btn>
       </div>
       <div class="c1" v-if="view=='form'">
@@ -186,7 +185,7 @@
 /// - Szerkeszthető rész kezdete
 const config = {
   // Oldal címsor
-  kiírás: 'Példa nyilvántartás',
+  kiírás: 'Cégnyilvántartó - Webfejlesztés I. modulzáró vizsga megoldás 2018 szeptember 28.',
   // Adatstruktúra és beviteli maszkők - kötelező kitölteni!
   // A megadottak csak mnták, a nem szükségeseket törölni kell.
   /* mask (maszk) jelölések:
@@ -197,56 +196,90 @@ const config = {
   */
   adatstuktúra: [
     { key:    'nev',
-      mn :    'Név',
+      mn :    'Név / Cégnév',
       align:  'left',
       counter: 30
     },
-    { key:    'szakma',
-      mn :    'Szakma',
+    { key:    'tipus',
+      mn :    'Típ.',
       align:  'left',
-      type:   'multiple',
       items: [
-              'Ács',
-              'Asztalos',
-              'Burkoló',
-              'Kőműves',
-              'Villanyszerelő',
-              'Vízvezetékszerelő'
+              'Egyéni vállalkozó',
+              'BT',
+              'KFT',
+              'RT',
+              'ZRT',
+              'Iskola',
+              'Önkormányzat'
       ]
-    },
-    { key:    'tel',
-      mn :    'Telefonszám',
-      mask:   '(##) ###-##-##',
-      counter: 9
-    },
-    { key:    'ert',
-      type:   'rating',
-    },
-    { key:    'szig',
-      mn :    'Személyi igazolvány száma',
-      mask:   '######AA',
-      counter: 8
     },
     { key:    'cim',
       mn :    'Cím',
       type:   'address'
+    },
+    { key:    'vtel',
+      mn :    'Telefonszám',
+      mask:   '(##) ###-###',
+      counter: 8
+    },
+    { key:    'mtel',
+      mn :    'Mobil',
+      mask:   '(##) ###-##-##',
+      counter: 9
+    },
+    { key:    'adosz',
+      mn :    'Adószám',
+      mask:   '########-#-##',
+      counter: 11
+    },
+    { key:    'nysz',
+      mn :    'Nyilvántartási szám',
+      mask:   '##-##-######',
+      counter: 10
+    },
+    { key:    'uttr',
+      mn :    'Utolsó tranzakció',
+      mask:   '####.##.##.',
+      counter: 8
+    },
+    { key:    'banksz',
+      mn :    'Bankszámlaszám',
+      mask:   '########-########-########',
+      counter: 24
+    },
+    { key:    'ktip',
+      mn :    'Kapcsolat típusa',
+      align:  'left',
+      type:   'multiple',
+      items: [
+              'Felügyeleti szerv',
+              'Alvállalkozó',
+              'Vevő',
+              'Beszállító',
+              'Szolgáltató'
+      ]
+    },
+    { key:    'ert',
+      type:   'rating',
     }
 
   ],
 
   // rejtett mezők - lista nézetben nem látszanak
-  hidedkeys: ['szig'],
+  hidedkeys: ['cim','mtel','adosz','nysz','banksz'],
 
   // Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
   szuresrendez: [
     'nev',
-    'szakma',
+    'tipus',
+    'uttr',
+    'ktip',
     '_cim'
   ],
 
-  editicon: 3,      //1..3
+  editicon: 1,      //1..3
 
-  deleteicon: 3,     //1..5
+  deleteicon: 1,     //1..5
 
   logger: false     //debugoláshoz érdemes true-ra állítani
 }
@@ -373,6 +406,7 @@ export default {
 <style>
 
 /* - Szerkeszthető rész kezdete */
+@import url('https://fonts.googleapis.com/css?family=Dosis|Srisakdi');
 .fejrow {
   font-size:16px;
   color: #154741;
@@ -419,16 +453,18 @@ td,th {
   box-shadow: 1px 1px 4px;
   border-radius: 12px;
   padding:20px;
-  background-color: #efedde;
+  background-color: rgba(230, 250, 250, 0.3);
 }
-h1 {
+.header {
   box-shadow: 1px 1px 4px;
   border-radius: 12px;
   padding:20px;
   margin-bottom: 23px;
-  background-color: #dfedde;
+  background-color: rgba(160, 180, 220, 0.3);
+  font-family: 'Srisakdi', cursive;
 }
 #app {
+  font-family: 'Dosis', sans-serif;
   margin: 20px;
   text-align: center;
   height:90%;
