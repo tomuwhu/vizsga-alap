@@ -18,7 +18,10 @@
             </v-flex>
             <v-flex  text-xs-left xs6>
               &nbsp;
-              <i>{{ mask( o[elem.key], elem.mask ) }}</i>
+              <span v-if="elem.type==='address'">
+                {{o[elem.key+'_irsz']}}, {{idx(o[elem.key+'_irsz'])}}, {{o[elem.key+'_cimsor']}}
+              </span>
+              <i v-else>{{ mask( o[elem.key], elem.mask ) }}</i>
             </v-flex>
           </v-layout>
         </v-layout>
@@ -61,7 +64,10 @@
               {{key+1}}
             </th>
             <td v-for="elem in listv2" :style="'text-align: '+elem.align">
-              <span>
+              <span v-if="elem.type==='address'">
+                {{sor[elem.key+'_irsz']}}, {{idx(sor[elem.key+'_irsz'])}}, {{sor[elem.key+'_cimsor']}}
+              </span>
+              <span v-else>
                 {{ mask( sor[elem.key], elem.mask ) }}
               </span>
             </td>
@@ -115,6 +121,33 @@
             color    = "red darken-3"
             half-increments
             hover />
+          <table class = "i1" v-else-if= "elem.type==='address'">
+            <tr>
+              <td style="width:20%; test-align:left;">
+                {{elem.mn}}
+              </td>
+              <td style="width:40%;">
+                <v-text-field
+                  class    = "ihalf"
+                  label   = "Irányítószám"
+                  mask    = "####"
+                  v-model  = "o[elem.key+'_irsz']"
+                />
+              </td>
+              <td style="width:40%;">
+                {{idx(o[elem.key+'_irsz'])}}
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <v-text-field
+                  class    = "i1"
+                  label   = "Utca / házszám / (emelet / ajtó)"
+                  v-model  = "o[elem.key+'_cimsor']"
+                />
+              </td>
+            </tr>
+          </table>
           <v-select
             v-else-if= "elem.items"
             class    = "i1"
@@ -193,7 +226,12 @@ const config = {
       mn :    'Személyi igazolvány száma',
       mask:   '######AA',
       counter: 8
+    },
+    { key:    'cim',
+      mn :    'Cím',
+      type:   'address'
     }
+
   ],
 
   // rejtett mezők - lista nézetben nem látszanak
@@ -202,7 +240,8 @@ const config = {
   // Szűrés - rendezés beállítása, első mező szerint rendez, mindegyik felsoroltban keres
   szuresrendez: [
     'nev',
-    'szakma'
+    'szakma',
+    '_cim'
   ],
 
   editicon: 3,      //1..3
@@ -302,7 +341,13 @@ export default {
                       if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
                     } )
                   }
-                  else if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
+                  else if (szuro[0]==='_') {
+                    if (new RegExp(this.szuro,'i').test( v[szuro.slice(1)+'_cimsor'] )) q = true
+                    if (new RegExp(this.szuro,'i').test( this.idx(v[szuro.slice(1)+'_irsz']) )) q = true
+                  }
+                  else {
+                    if (new RegExp(this.szuro,'i').test( v[szuro] )) q = true
+                  }
                 })
                 return q
               } )
@@ -362,7 +407,11 @@ td,th {
   color: #256761;
 }
 .i1 {
-  width:200px;
+  width:400px;
+  margin: 0 auto;
+}
+.ihalf {
+  width:100px;
   margin: 0 auto;
 }
 .c1 {
