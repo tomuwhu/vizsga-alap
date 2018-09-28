@@ -59,7 +59,7 @@
               <span class="fejrow">Műveletek</span>
             </th>
           </tr>
-          <tr v-for="(sor, key) in lista" :class="'row'+(key%2)">
+          <tr v-for="(sor, key) in lista" :class="'row'+(key%3)">
             <th>
               {{key+1}}
             </th>
@@ -431,6 +431,11 @@ tr.row0 {
 }
 tr.row1 {
   background-color: rgba(220, 180, 220, 0.3);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px gray;
+}
+tr.row2 {
+  background-color: rgba(220, 220, 180, 0.3);
   border-radius: 5px;
   box-shadow: 1px 1px 2px gray;
 }
