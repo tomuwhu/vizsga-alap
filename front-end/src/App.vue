@@ -360,9 +360,6 @@ export default {
     }
   },
   computed: {
-    varos() {
-      return this.idx(this.o.irsz)
-    },
     lista() {
       return this
               .t
