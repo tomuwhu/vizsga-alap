@@ -118,7 +118,6 @@
           <v-rating
             v-if     = "elem.type==='rating'"
             v-model  = "o[elem.key]"
-            color    = "red darken-3"
             half-increments
             hover />
           <table class = "i1" v-else-if= "elem.type==='address'">
