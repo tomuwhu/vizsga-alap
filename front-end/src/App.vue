@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-      <h1>{{kiiras}} - {{idx('6725')}}</h1>
+      <h1>{{kiiras}}</h1>
       <div class="c1" v-if="view=='reszl'">
         <v-layout row v-for="elem in listview">
           <v-flex
