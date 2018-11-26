@@ -490,15 +490,6 @@ h1 {
   margin-top:15px;
   background-color: #efedde;
 }
-.fft {
-  color:blue;
-  margin: 2px auto;
-  padding: 9px;
-  border: solid 1px black;
-  box-shadow: 0px 0px 3px black;
-  border-radius: 6px;
-  background-color: #ecf1f1;
-}
 input[type=file] {
   display :none;
 }
