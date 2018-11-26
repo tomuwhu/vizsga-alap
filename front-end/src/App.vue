@@ -168,16 +168,18 @@
             &nbsp;
           <v-btn @click="ment" class="white--text green">Ment</v-btn>
       </div>
-      <div class="devtool">Adatbázis ürítése
+      <div class="devtool">
         <v-btn @click="deleteall"
              title="adatbázis ürítése"
              fab dark small
              color="red">
           <v-icon
              rounded>delete_sweep</v-icon>
-        </v-btn> &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
+        </v-btn> &llarr;
+         Adatbázis ürítése
+         &nbsp;  &nbsp;  &nbsp;  &nbsp;  || &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
         <span>
-          Fájl feltöltése
+          Fájl feltöltése &rrarr;
           <v-btn
             title="fájl feltöltése az adatbázisba" 
             color="error"
