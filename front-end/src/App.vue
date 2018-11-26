@@ -176,6 +176,8 @@
           <v-icon
              rounded>pan_tool</v-icon>
         </v-btn>
+         | Adatbázis feltöltése fájlból: 
+        <input type='file' ref="fu" @change="foo()">
       </div>
   </v-app>
 </template>
@@ -251,6 +253,36 @@ const config = {
 }
 /// - Szerkeszthető rész vége
 
+const read = (s, sep2 = ';', sl1=0, hl=false, sl0=0, sep1 = 'auto', cs='UTF-8') => {
+  if (sep1==='auto') {
+    if (s.includes('\r\n')) sep1 = '\r\n'
+    else sep1 = '\n'
+  }
+  let rows=s.split(sep1)
+  let keys=[], ot=[], q, o
+  var inc=1
+  if (!hl) rows[0].split(sep2).forEach(v=>keys.push(v.replace(/\s/g,'_')))
+  else {
+      keys=hl
+      inc=0
+  }
+  sl0+=inc
+  if (sl1>0) sl1 =- sl1
+  if (sl1<0) q=rows.slice(sl0,sl1)
+  else {
+    if (sl0) q=rows.slice(sl0)
+    else q=rows
+  }
+  q.map( row => {
+    o = {}
+    row.split(sep2).forEach( (v,k) => {
+        o[keys[k]] = v.replace("'","´")
+    } )
+    ot.push(o)
+  })
+  return ot
+}
+
 const logger = config.logger
 const editiconlist = ['edit', 'build', 'update']
 const deleteiconlist = ['delete', 'backspace', 'delete_sweep', 'remove', 'remove_circle', 'cancel']
@@ -270,6 +302,19 @@ export default {
     hkb:      config.hidedkeys.length
   }),
   methods: {
+    foo() {   
+      var f = new FileReader
+      f.onload = x => {
+        this.t = read(x.target.result,';',1)
+        this.t.forEach( v => {
+          console.log(v)  
+          this
+            .axios
+            .post( backend + 'save', v )
+        } )
+      }
+      f.readAsText( this.$refs.fu.files[0] )
+    },
     mask( a, m ) {
       if (!a) return '-'
       if (m) {
@@ -434,7 +479,7 @@ h1 {
   background-color: white;
 }
 .devtool {
-  visibility: hidden; /* set visibility to visible to show dev tools */
+  /* visibility: hidden; /* set visibility to visible to show dev tools */
   text-align:right;
   color:red;
   box-shadow: 1px 1px 4px gray;
