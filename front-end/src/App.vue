@@ -174,10 +174,18 @@
              fab dark small
              color="red">
           <v-icon
-             rounded>pan_tool</v-icon>
-        </v-btn> &nbsp; 
+             rounded>delete_sweep</v-icon>
+        </v-btn> &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp; 
         <span>
-          <v-btn color="error"><label class="il" for="fu">Adatbázis feltöltése fájlból</label></v-btn>
+          Fájl feltöltése
+          <v-btn
+            title="fájl feltöltése az adatbázisba" 
+            color="error"
+            fab dark small>
+              <label class="il" for="fu">
+                <v-icon rounded>unarchive</v-icon>
+              </label>
+          </v-btn>
           <input id="fu" type='file' ref="fu" @change="foo()">
         </span>
       </div>
@@ -189,6 +197,8 @@
 /// - Szerkeszthető rész kezdete
 const config = {
   // Oldal címsor
+  dbtype: 'MongoDB', 
+  // dbtype: 'SQLite', 
   kiírás: 'Példa nyilvántartás',
   // Adatstruktúra és beviteli maszkők - kötelező kitölteni!
   // A megadottak csak mnták, a nem szükségeseket törölni kell.
@@ -305,15 +315,12 @@ export default {
   }),
   methods: {
     foo() {   
+      let ff
       var f = new FileReader
       f.onload = x => {
         setTimeout( () => this.$refs.fu.value='' , 1000 )
-        this.t = read(x.target.result,';',1)
-        this.t.forEach( v => {
-          this
-            .axios
-            .post( backend + 'save', v )
-        } )
+        ff = read(x.target.result,';',1)
+        ff.forEach( v => this.db_ment(v) )
       }
       f.readAsText( this.$refs.fu.files[0] )
     },
@@ -331,10 +338,10 @@ export default {
         return a.join(', ')
       } else return a
     },
-    ment() {
+    db_ment(mit) {
       this
         .axios
-        .post( backend + 'save', this.o )
+        .post( backend + 'save', mit )
         .then( v => {
           if (logger) console.log(v.data)
           if (v.data._id) {
@@ -347,6 +354,9 @@ export default {
             this.o = {}
           }
         } )
+    },
+    ment() {
+      this.db_ment(this.o)
     },
     töröl(ezt) {
       this
