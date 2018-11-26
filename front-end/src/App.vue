@@ -176,9 +176,9 @@
           <v-icon
              rounded>pan_tool</v-icon>
         </v-btn> &nbsp; 
-        <span class="fft" >
-          &nbsp; Adatbázis feltöltése fájlból &nbsp; 
-          <input type='file' ref="fu" @change="foo()">
+        <span>
+          <v-btn color="error"><label class="il" for="fu">Adatbázis feltöltése fájlból</label></v-btn>
+          <input id="fu" type='file' ref="fu" @change="foo()">
         </span>
       </div>
   </v-app>
@@ -307,9 +307,9 @@ export default {
     foo() {   
       var f = new FileReader
       f.onload = x => {
+        setTimeout( () => this.$refs.fu.value='' , 1000 )
         this.t = read(x.target.result,';',1)
         this.t.forEach( v => {
-          console.log(v)  
           this
             .axios
             .post( backend + 'save', v )
@@ -498,6 +498,12 @@ h1 {
   box-shadow: 0px 0px 3px black;
   border-radius: 6px;
   background-color: #ecf1f1;
+}
+input[type=file] {
+  display :none;
+}
+.il {
+  cursor: pointer;
 }
 /* - Szerkeszthető rész vége */
 
