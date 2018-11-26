@@ -175,9 +175,11 @@
              color="red">
           <v-icon
              rounded>pan_tool</v-icon>
-        </v-btn>
-         | Adatbázis feltöltése fájlból: 
-        <input type='file' ref="fu" @change="foo()">
+        </v-btn> &nbsp; 
+        <span class="fft" >
+          &nbsp; Adatbázis feltöltése fájlból &nbsp; 
+          <input type='file' ref="fu" @change="foo()">
+        </span>
       </div>
   </v-app>
 </template>
@@ -480,13 +482,22 @@ h1 {
 }
 .devtool {
   /* visibility: hidden; /* set visibility to visible to show dev tools */
-  text-align:right;
+  text-align:center;
   color:red;
   box-shadow: 1px 1px 4px gray;
   border-radius: 12px;
   padding:5px;
   margin-top:15px;
   background-color: #efedde;
+}
+.fft {
+  color:blue;
+  margin: 2px auto;
+  padding: 9px;
+  border: solid 1px black;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 6px;
+  background-color: #ecf1f1;
 }
 /* - Szerkeszthető rész vége */
 
