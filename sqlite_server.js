@@ -12,14 +12,18 @@ const logger = false
 app.get(/list/, (req, res) => {
     let t = []
     let o = {}
-    db.each(`SELECT * FROM data`, (err, row) => {
-        o = JSON.parse(row.json)
-        o._id= row.id
-        t.push(o)
-    }, () => {
-        res.send(t)
-        logger ? console.log(t) : false
-    })
+    db.each(
+        `SELECT * FROM data`,
+        (err, row) => {
+            o = JSON.parse(row.json)
+            o._id= row.id
+            t.push(o)
+        },
+        (err, n) => {
+            res.send(t)
+            logger ? console.log(t) : false
+        }
+    )
 } )
 
 app.post(/save/, (req, res) => {
@@ -29,21 +33,30 @@ app.post(/save/, (req, res) => {
         res.send({n:1})
      } else {
         let id = Math.random()
-        db.run(`INSERT INTO data VALUES (${ id }, '${ JSON.stringify(req.body) }' )`)
-        req.body._id=id
-        res.send(req.body)
+        db.run(`INSERT INTO data VALUES ( ${ id }, '${ JSON.stringify(req.body) }' )`, err => {
+            if (!err) {
+                req.body._id = id
+                res.send(req.body)
+            } else res.send({err: -1})
+        } ) 
+        
      }
 })
 
 app.get(/del/, (req, res) => {
-    db.run(`DELETE FROM data`)
-    res.send('Minden törölve')
+    db.run(
+        `DELETE FROM data`, 
+        (err,n) => err ? res.send( {err} ) : res.send({err})
+    )
 })
 
 app.post(/del/, (req, res) => {
     logger ? console.log(req.body) : 1
-    db.run(`DELETE FROM data WHERE id = ${ req.body._id } `)
-    res.send({ n: 1 })
+    db.run(
+        `DELETE FROM data WHERE id = ${ req.body._id } `, 
+        (err,n) => err ? res.send( {err} ) : res.send( { n: 1 } ) 
+    )
+    
 })
 
 app.use('/', express.static(static_folder))
