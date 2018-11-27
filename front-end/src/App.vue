@@ -322,7 +322,12 @@ export default {
       f.onload = x => {
         setTimeout( () => this.$refs.fu.value='' , 1000 )
         ff = read(x.target.result,';',1)
-        ff.forEach( v => this.db_ment(v) )
+        ff.forEach( v => {
+          Object.entries(v).forEach( oe => {
+            if (Number(oe[1])==oe[1] && oe[1].length<3) v[oe[0]]=Number(oe[1])
+          })
+          this.db_ment(v) 
+        })
       }
       f.readAsText( this.$refs.fu.files[0] )
     },
@@ -378,8 +383,6 @@ export default {
         .axios
         .get( backend + 'del' )
         .then( v => {
-          console.log(v.data)
-          
           if (v.data.n) {
             this.t = []
           }
