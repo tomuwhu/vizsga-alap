@@ -10,7 +10,7 @@ const database_name   =  'vizsga'
 const collection_name =  'minimal'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
-const logger          =   false
+const logger          =   true
 
 mdb   .connect( 'mongodb://localhost:27017',
                  { useNewUrlParser: true },

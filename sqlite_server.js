@@ -22,17 +22,24 @@ db.serialize( () => {
 
 app.get(/list/, (req, res) => {
     let t = []
+    let o = {}
     db.each(`SELECT * FROM data`, (err, row) => {
         console.log(row)
-        t.push(row)
+        o = JSON.parse(row.json)
+        o._id= row.id
+        t.push(o)
     })
-    setTimeout( () => res.send(t), 100 )
+    setTimeout( () => {
+        res.send( t )
+        logger ? console.log( t ) : false
+    }, 100 )
 } )
 
 app.post(/save/, (req, res) => {
      logger ? console.log(req.body) : 1
      if (req.body._id) {
-
+        db.run(`UPDATE data SET json = '${ JSON.stringify(req.body) }' WHERE id = 'req.body._id'`)
+        res.send({n:1})
      } else {
         let id = Math.random()
         db.run(`INSERT INTO data VALUES (${ id }, '${ JSON.stringify(req.body) }' )`)
