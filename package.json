@@ -4,7 +4,9 @@
   "description": "Vizsga alap",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon node index.js"
+    "test": "nodemon node index.js",
+    "mongo": "nodemon node index.js",
+    "sqlite": "nodemon node sqlite_server.js"
   },
   "repository": {
     "type": "git",

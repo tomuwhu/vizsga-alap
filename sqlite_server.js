@@ -7,24 +7,12 @@ var db = new sqlite3.Database('x.db')
 
 const static_folder = 'root'
 const vue_folder = 'front-end/dist'
-const logger = true
-
-/*
-db.serialize( () => {
-    db.run(`CREATE TABLE data (id PRIMARY KEY, json TEXT)`)
-    db.run(`DELETE FROM data`)
-    db.run(`INSERT INTO data VALUES (${ Math.random() }, 'cucc')`)
-    db.each(`SELECT * FROM data`, (err, row) => {
-        console.log(row)
-    })
-})
-*/
+const logger = false
 
 app.get(/list/, (req, res) => {
     let t = []
     let o = {}
     db.each(`SELECT * FROM data`, (err, row) => {
-        console.log(row)
         o = JSON.parse(row.json)
         o._id= row.id
         t.push(o)
@@ -38,7 +26,7 @@ app.get(/list/, (req, res) => {
 app.post(/save/, (req, res) => {
      logger ? console.log(req.body) : 1
      if (req.body._id) {
-        db.run(`UPDATE data SET json = '${ JSON.stringify(req.body) }' WHERE id = 'req.body._id'`)
+        db.run(`UPDATE data SET json = '${ JSON.stringify(req.body) }' WHERE id = ${ req.body._id }`)
         res.send({n:1})
      } else {
         let id = Math.random()
@@ -52,21 +40,13 @@ app.get(/del/, (req, res) => {
     db.run(`DELETE FROM data`)
     res.send('Minden törölve')
 })
-/*
+
 app.post(/del/, (req, res) => {
     logger ? console.log(req.body) : 1
-    db ? db.collection(collection_name)
-        .deleteOne({
-            "_id": ObjectId(req.body._id)
-        })
-        .then(v =>
-            res.send(v)
-        ) :
-        res.send({
-            error: -1
-        })
+    db.run(`DELETE FROM data WHERE id = ${ req.body._id } `)
+    res.send({ n: 1 })
 })
-*/
+
 app.use('/', express.static(static_folder))
 app.use('/vue', express.static(vue_folder))
 app.listen(3000)
