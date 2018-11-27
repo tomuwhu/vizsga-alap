@@ -378,6 +378,8 @@ export default {
         .axios
         .get( backend + 'del' )
         .then( v => {
+          console.log(v.data)
+          
           if (v.data.n) {
             this.t = []
           }

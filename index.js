@@ -10,7 +10,7 @@ const database_name   =  'vizsga'
 const collection_name =  'minimal'
 const static_folder   =  'root'
 const vue_folder      =  'front-end/dist'
-const logger          =   true
+const logger          =  false
 
 mdb   .connect( 'mongodb://localhost:27017',
                  { useNewUrlParser: true },
@@ -59,7 +59,7 @@ app   .post( /save/, ( req, res ) => {
 
 app   .get( /del/, ( req, res ) => {
               db  ? db .collection( collection_name  )
-                       .remove( {} )
+                       .deleteOne( {} )
                        .then( v=>
                          res.send(v)
                        )

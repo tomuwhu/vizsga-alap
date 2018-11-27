@@ -44,9 +44,10 @@ app.post(/save/, (req, res) => {
 })
 
 app.get(/del/, (req, res) => {
+    logger ? console.log('delete all') : 1
     db.run(
         `DELETE FROM data`, 
-        (err,n) => err ? res.send( {err} ) : res.send({err})
+        (err,n) => err ? res.send( {err} ) : res.send({n:1})
     )
 })
 
