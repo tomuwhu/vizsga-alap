@@ -9,11 +9,19 @@
 .../vizsga-alap> ```npm i```
 .../vizsga-alap/front-end> ```npm i```
 
-### MongoDB futtatása
+### Back-end futtatása
+
+#### - MongoDB-vel
+
+##### MongoDB futtatása
 - ```mongod```
 
-### Back-end futtatása
-- .../vizsga-alap> ```npm test```
+#### Back-end futtatása
+- .../vizsga-alap> ```npm run mongo```
+- Böngészőben: http://localhost:3000
+
+#### - SQLite-al
+- .../vizsga-alap> ```npm run sqlite```
 - Böngészőben: http://localhost:3000
 
 ### Front-end futtatása
