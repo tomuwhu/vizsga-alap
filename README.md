@@ -32,6 +32,16 @@
 - .../vizsga-alap/front-end> ```npm run build```
 - Böngészőben: http://localhost:3000/vue
 
+
+### Front-end futtatása dektop-alkalmazásként
+- .../vizsga-alap/front-end> ```npm run electron:serve```
+- Böngészőben: http://localhost:8080
+
+### Front-end fordítása
+- .../vizsga-alap/front-end> ```npm run electron:build```
+- Böngészőben: http://localhost:3000/vue
+
+
 <hr>
 
 ### Példák a használathoz
