@@ -1,53 +1,61 @@
 # Vizsga-alap
-- ###### Vue-CLI + Vuetify + Axios
-- ###### Express + Body-parser + Cors
-- ###### MongoDB
 
-### Telepítés
+- Vue-CLI + Vuetify + Axios
+- Express + Body-parser + Cors
+- MongoDB
+
+## Telepítés
+
 - repository klónozása
 - .../> ```cd vizsga-alap```
-.../vizsga-alap> ```npm i```
-.../vizsga-alap/front-end> ```npm i```
+- .../vizsga-alap> ```npm i```
+- .../vizsga-alap/front-end> ```npm i```
 
-### Back-end futtatása
+## Back-end futtatása
 
-#### - MongoDB-vel
+### - MongoDB-vel
 
-##### MongoDB futtatása
+#### MongoDB futtatása
+
 - ```mongod```
 
-#### Back-end futtatása
+#### Szerver futtatása
+
 - .../vizsga-alap> ```npm run mongo```
 - Böngészőben: http://localhost:3000
 
-#### - SQLite-al
+### - SQLite-al
+
 - .../vizsga-alap> ```npm run sqlite```
 - Böngészőben: http://localhost:3000
 
 ### Front-end futtatása
+
 - .../vizsga-alap/front-end> ```npm run serve```
 - Böngészőben: http://localhost:8080
 
 ### Front-end fordítása
+
 - .../vizsga-alap/front-end> ```npm run build```
 - Böngészőben: http://localhost:3000/vue
 
 
 ### Front-end futtatása dektop-alkalmazásként
+
 - .../vizsga-alap/front-end> ```npm run electron:serve```
 - Böngészőben: http://localhost:8080
 
 ### Front-end fordítása
+
 - .../vizsga-alap/front-end> ```npm run electron:build```
 - Böngészőben: http://localhost:3000/vue
 
+## Példák a használathoz
 
-<hr>
+### .../vizsga-alap/front-end/src/App.vue
 
-### Példák a használathoz
-###### .../vizsga-alap/front-end/src/App.vue
+#### Axios - Adatok lekérése
 
-#### Axios - Adatok lekérése:
 ```javascript
 mounted() {
   ...

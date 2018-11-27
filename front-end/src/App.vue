@@ -2,7 +2,7 @@
   <v-app id="app">
       <h1>{{kiiras}}</h1>
       <div class="c1" v-if="view=='reszl'">
-        <v-layout row v-for="elem in listview">
+        <v-layout row :key="key" v-for="(elem,key) in listview">
           <v-flex
              v-if     = "elem.type==='rating'">
           <v-rating
@@ -49,7 +49,7 @@
         <table class="table" v-if="t.length" style="margin:0 auto;">
           <tr>
             <th>#</th>
-            <th v-for="elem in listv2" :style="'text-align: '+elem.align">
+            <th :key="key" v-for="(elem,key) in listv2" :style="'text-align: '+elem.align">
               <span v-if="elem.type==='rating'">
                 <i class="material-icons">star_half</i>
               </span>
@@ -59,11 +59,11 @@
               <span class="fejrow">Műveletek</span>
             </th>
           </tr>
-          <tr v-for="(sor, key) in lista" :class="'row'+(key%2)">
+          <tr :key="key" v-for="(sor, key) in lista" :class="'row'+(key%2)">
             <th>
               {{key+1}}
             </th>
-            <td v-for="elem in listv2" :style="'text-align: '+elem.align">
+            <td :key="key" v-for="(elem,key) in listv2" :style="'text-align: '+elem.align">
               <span v-if="elem.type==='address'">
                 {{sor[elem.key+'_irsz']}}, {{idx(sor[elem.key+'_irsz'])}}, {{sor[elem.key+'_cimsor']}}
               </span>
@@ -114,7 +114,7 @@
         </v-btn>
       </div>
       <div class="c1" v-if="view=='form'">
-          <div v-for="elem in listview">
+          <div :key="key" v-for="(elem,key) in listview">
           <v-rating
             v-if     = "elem.type==='rating'"
             v-model  = "o[elem.key]"
