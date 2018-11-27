@@ -16,11 +16,10 @@ app.get(/list/, (req, res) => {
         o = JSON.parse(row.json)
         o._id= row.id
         t.push(o)
+    }, () => {
+        res.send(t)
+        logger ? console.log(t) : false
     })
-    setTimeout( () => {
-        res.send( t )
-        logger ? console.log( t ) : false
-    }, 100 )
 } )
 
 app.post(/save/, (req, res) => {
