@@ -324,7 +324,7 @@ export default {
         ff = read(x.target.result,';',1)
         ff.forEach( v => {
           Object.entries(v).forEach( oe => {
-            if (Number(oe[1])==oe[1] && oe[1].length<3) v[oe[0]]=Number(oe[1])
+            if (Number(oe[1])==oe[1] && oe[0]==="ert") v[oe[0]]=Number(oe[1])
           })
           this.db_ment(v) 
         })
